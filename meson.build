@@ -1,5 +1,5 @@
 project('FFTSpectrum', 'c',
-  default_options : ['buildtype=release', 'b_ndebug=if-release', 'c_std=c99'],
+  default_options : ['buildtype=release', 'b_ndebug=if-release', 'b_lto=True', 'c_std=c99'],
   meson_version : '>=0.49.0',
   version : '2'
 )
