@@ -60,9 +60,13 @@
 #endif
 
 #include <math.h>
+#if defined(__X86_64__)
 #include <xmmintrin.h>
 #include <emmintrin.h>
-
+#elif defined(__ARM_NEON__)
+#include "sse2neon.h"
+#define USE_SSE4
+#endif
 /* yes I know, the top of this file is quite ugly */
 
 /*!
@@ -104,7 +108,7 @@ typedef __m128d v2df; // vector of 2 double (sse2)
 	an MMX vector of 2 32bit ints
  */
 typedef __m64 v2si;   // vector of 2 int (mmx)
-
+#ifndef __ARM_NEON__
 #if defined(USE_SSE3) || defined(USE_SSE4)
 #	define USE_SSE3
 #	include <pmmintrin.h>
@@ -117,7 +121,7 @@ typedef __m64 v2si;   // vector of 2 int (mmx)
 #	define USE_SSE4
 #	include <smmintrin.h>
 #endif
-
+#endif
 #ifdef __GNUC__0
 #	define _MM_SET_PD(b,a)		(v2df){(a),(b)}
 #	define _MM_SET1_PD(a)		(v2df){(a),(a)}

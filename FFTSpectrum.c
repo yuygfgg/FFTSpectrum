@@ -40,7 +40,11 @@
 #define USE_SSE4
 #define SSE_MATHFUN_WITH_CODE
 #include "sse_mathfun.h"
+#endif
 
+#if defined(__ARM_NEON__)
+#define SSE_MATHFUN_WITH_CODE
+#include "sse_mathfun.h"
 #endif
 
 #include "fftw3.h"
